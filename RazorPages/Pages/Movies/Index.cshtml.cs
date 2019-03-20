@@ -31,10 +31,15 @@ namespace RazorPages.Pages.Movies
 
         //MovieGenre contains the specific genre the user selects.
         [BindProperty(SupportsGet = true)]
-        public string MovieGenere { get; set; }
+        public string MovieGenre { get; set; }
 
         public async Task OnGetAsync()
         {
+            //LINQ to get list of generes.
+            IQueryable<string> genreQuery = from m in _context.Movie
+                                            orderby m.Genre
+                                            select m.Genre;
+
             //contains a list of movies.
             var movies = from m in _context.Movie
                          select m;
@@ -43,6 +48,15 @@ namespace RazorPages.Pages.Movies
             if (!string.IsNullOrEmpty(SearchString)) {
                 movies = movies.Where(s => s.Title.Contains(SearchString));
             }
+
+            //completes the genere users search.
+            if (!string.IsNullOrEmpty(MovieGenre))
+            {
+                movies = movies.Where(x => x.Genre == MovieGenre);
+            }
+
+            //update Genres object from search.
+            Genres = new SelectList(await genreQuery.Distinct().ToListAsync());
 
             //update the movie object from the search.
             Movie = await movies.ToListAsync();

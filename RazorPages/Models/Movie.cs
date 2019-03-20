@@ -19,6 +19,9 @@ namespace RazorPages.Models
         //sets format for price property
         [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
+        
 
+        //Field for recording movie rating.
+        public string Rating { get; set; }
     }
 }

@@ -10,8 +10,8 @@ using RazorPages.Models;
 namespace RazorPages.Migrations
 {
     [DbContext(typeof(RazorPagesContext))]
-    [Migration("20190320145650_Initial")]
-    partial class Initial
+    [Migration("20190320193027_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,7 +29,10 @@ namespace RazorPages.Migrations
 
                     b.Property<string>("Genre");
 
-                    b.Property<decimal>("Price");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Rating");
 
                     b.Property<DateTime>("ReleaseDate");
 
