@@ -31,13 +31,13 @@ namespace RazorPages.Models
         public decimal Price { get; set; }
         
         //Validate the format of the input.
-        [RegularExpression(@"^[A-Z]+[a-zA-Z]""'\s-]*$")]
+        [RegularExpression(@"^[A-Za-z]+$")]
         //Make sure it was entered into the form.
         [Required]
         [StringLength(30)]
         public string Genre { get; set; }
 
-        [RegularExpression(@"^[A-Z]+[a-zA-Z0-9]""`\s-]*$")]
+        [RegularExpression(@"^[A-Z]+$")]
         [StringLength(5)]
         [Required]
         //Field for recording movie rating.
